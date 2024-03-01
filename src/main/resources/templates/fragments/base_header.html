@@ -1,0 +1,14 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="base_header (page_title)">
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
+    <title th:text="${page_title}"></title>
+    <link th:rel="stylesheet" th:href="@{/css/bundle-site.css}">
+    <script th:src="@{/js/bundle-site.js}"></script>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <script th:defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+</html>

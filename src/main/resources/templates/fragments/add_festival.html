@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/base_header::base_header (page_title='Add Festival')}"></th:block>
+</head>
+
+<body>
+<header th:include="~{fragments/nav::navbar}"></header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+            <h1>Add a Festival</h1>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+            <form method="post" th:object="${festival}">
+
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{name}" class="form-control" id="floatingInput"
+                           placeholder="John">
+                    <label for="floatingInput">Name</label>
+                    <div role="alert" th:if="${#fields.hasErrors('name')}" class="alert alert-danger" th:errors="*{name}">Name Error</div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon2">Start Date:</span>
+                    <input type="date" th:field="*{startDate}" min="2020-01-01"
+                           placeholder="2000-01-01"
+                           class="form-control form-control-md" aria-describedby="basic-addon1"/>
+                    <div role="alert" th:if="${#fields.hasErrors('startDate')}" class="alert alert-danger" th:errors="*{startDate}">startDate Error</div>
+                </div>
+
+
+                <div class="form-floating mb-3">
+                    <input type="number" th:field="*{lengthDays}" class="form-control" id="floatingInput2"/>
+                    <label for="floatingInput2">Length Days:</label>
+                    <div role="alert" th:if="${#fields.hasErrors('lengthDays')}" class="alert alert-danger" th:errors="*{lengthDays}">lengthDays Error</div>
+                </div>
+
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="floatingSelect" th:field="*{festivalType}">
+                        <option th:each="festivalType:${festivalTypes}" th:value="${festivalType}"
+                                th:text="${festivalType.getString()}"
+                                value="RAP">Rap
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Type</label>
+                    <div role="alert" th:if="${#fields.hasErrors('festivalType')}" class="alert alert-danger" th:errors="*{festivalType}">festivalType Error</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{organizer}" class="form-control" id="floatingInput3"/>
+                    <label for="floatingInput3">Organizer</label>
+                    <div role="alert" th:if="${#fields.hasErrors('organizer')}" class="alert alert-danger" th:errors="*{organizer}">organizer Error</div>
+                </div>
+                <div class="form-floating mb-3">
+<!--                    <span class="input-group-text">$</span>-->
+
+                    <input type="number" step="0.01" class="form-control" id="floatingInput4" th:field="*{cost}"/>
+                    <label for="floatingInput4">Cost</label>
+                    <div role="alert" th:if="${#fields.hasErrors('cost')}" class="alert alert-danger" th:errors="*{cost}">cost Error</div>
+
+                </div>
+
+                <div class="row">
+                    <button type="submit" value="Add Artist" class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</div>
+
+
+<!--<form method="post">-->
+<!--    <div class="form-field">-->
+<!--        <label for="name">Name:</label><input type="text" id="name" name="name"/>-->
+<!--    </div>-->
+<!--    <div class="form-field">-->
+<!--        <label for="startDate">Start Date:</label><input type="date" id="startDate" name="startDate" min="2020-01-01"/>-->
+<!--    </div>-->
+<!--    <div class="form-field">-->
+<!--        <label for="lengthDays">Length Days:</label><input type="number" id="lengthDays" name="lengthDays"/>-->
+<!--    </div>-->
+<!--    <div class="form-field">-->
+<!--        <label for="type">Type:</label>-->
+<!--        <select id="type" name="festivalType">-->
+<!--            <option th:each="festivalType:${festivalTypes}" th:value="${festivalType}"-->
+<!--                    th:text="${festivalType.getString()}"-->
+<!--                    value="RAP">Rap-->
+<!--            </option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div class="form-field">-->
+<!--        <label for="organizer">Organizer:</label><input type="text" id="organizer" name="organizer"/>-->
+<!--    </div>-->
+<!--    <div class="form-field">-->
+<!--        <label for="cost">Cost:</label><input type="number" step="0.001" id="cost" name="cost"/>-->
+<!--    </div>-->
+
+<!--    <input type="submit" value="Add Festival"/>-->
+<!--</form>-->
+</body>
+</html>

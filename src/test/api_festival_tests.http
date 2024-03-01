@@ -1,0 +1,152 @@
+# FESTIVALS API
+# getSingleFestival
+GET http://localhost:8080/api/festivals/1 HTTP/1.1
+Accept: application/json
+###
+# Response 200 - OK
+
+GET http://localhost:8080/api/festivals/0 HTTP/1.1
+Accept: application/json
+###
+# Repsonse 404 - Not Found
+
+# getAllFestivals
+GET http://localhost:8080/api/festivals HTTP/1.1
+Accept: application/json
+###
+# Response 200 - OK
+# If there are no festivals in the database, the response will be 204 - No Content
+
+# addNewfestival
+POST http://localhost:8080/api/festivals HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+
+{
+  "name": "Festival Rock",
+  "startDate": "2023-08-01",
+  "lengthDays": 3,
+  "festivalType": "ROCK",
+  "organizer": "The Boys",
+  "cost": 300
+}
+###
+# Response 201 - Created
+
+POST http://localhost:8080/api/festivals HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+
+{
+  "name": "Festival Rock",
+  "startDate": "2023-08-01",
+  "lengthDays": 3,
+  "festivalType": "ROCK",
+  "organizer": "The Boys"
+}
+###
+# Response 400 - Bad Request
+
+# updateFestival
+PUT http://localhost:8080/api/festivals/2 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=456B944CA02B57C2D2DF7955CC0E1731
+X-Csrf-Token: 84fa85f3-143d-4942-b721-b0eca6935f4c
+
+{
+  "id": 2,
+  "name": "Festival Rock",
+  "startDate": "2023-08-01",
+  "lengthDays": 3,
+  "festivalType": "ROCK",
+  "organizer": "The Boys",
+  "cost": 300
+}
+###
+# Response 200 - OK
+
+PUT http://localhost:8080/api/festivals/3 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+
+{
+  "id": 2,
+  "name": "Festival Rock",
+  "startDate": "2023-08-01",
+  "lengthDays": 3,
+  "festivalType": "ROCK",
+  "organizer": "The Boys",
+  "cost": 300
+}
+###
+# Response 409 - Conflict
+
+PUT http://localhost:8080/api/festivals/2 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+
+{
+  "id": 2,
+  "name": "Festival Rock",
+  "startDate": "2023-08-01",
+  "lengthDays": 3,
+  "festivalType": "ROCK",
+  "organizer": "The Boys"
+}
+###
+# Response 400 - Bad Request
+
+PUT http://localhost:8080/api/festivals/11 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+
+{
+  "id": 2,
+  "name": "Festival Rock",
+  "startDate": "2023-08-01",
+  "lengthDays": 3,
+  "festivalType": "ROCK",
+  "organizer": "The Boys",
+  "cost": 300
+}
+###
+# Response 404 - Not Found
+
+# deleteFestival
+DELETE http://localhost:8080/api/festivals/1 HTTP/1.1
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+###
+# Response 204 - No Content
+
+DELETE http://localhost:8080/api/artists/7 HTTP/1.1
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+###
+# Response 404 - Not Found
+
+
+# getArtistsGoingToFestival
+GET http://localhost:8080/api/festivals/5/artists HTTP/1.1
+Accept: application/json
+###
+# Response 200 - OK
+# If there are no artists in the database, the response will be 204 - No Content
+
+GET http://localhost:8080/api/festivals/7/artists HTTP/1.1
+Accept: application/json
+###
+# Response 404 - Not Found

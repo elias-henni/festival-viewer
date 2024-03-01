@@ -1,0 +1,45 @@
+{
+  "name": "programming-5",
+  "version": "1.0.0",
+  "description": "## Domain:",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/kdg-ti/programming-2.3/projects-21-22/elias.henni.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/kdg-ti/programming-2.3/projects-21-22/elias.henni/issues"
+  },
+  "homepage": "https://gitlab.com/kdg-ti/programming-2.3/projects-21-22/elias.henni#readme",
+    "dependencies": {
+      "@popperjs/core": "^2.11.7",
+      "bootstrap": "^5.2.3",
+      "animejs": "^3.2.1",
+      "lodash": "^4.17.21",
+      "validator": "^13.7.0",
+      "joi": "^17.9.2",
+      "flatpickr": "^4.6.13"
+    },
+    "devDependencies": {
+      "bootstrap-icons": "^1.8.3",
+      "source-map-loader": "^3.0.0",
+      "sweetalert2": "^11.4.9",
+      "css-loader": "^6.7.3",
+      "eslint": "^8.39.0",
+      "eslint-config-airbnb-base": "^15.0.0",
+      "eslint-plugin-import": "^2.27.5",
+      "mini-css-extract-plugin": "^2.7.5",
+      "sass": "^1.62.1",
+      "sass-loader": "^13.2.2",
+      "webpack": "^5.80.0",
+      "webpack-cli": "^5.0.2"
+
+    }
+}

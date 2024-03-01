@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/base_header::base_header (page_title='Locations')}"></th:block>
+</head>
+
+<body class="flex-wrapper">
+<header th:include="~{fragments/nav::navbar}"></header>
+<main>
+    <div class="row col-12">
+        <div class="col-2">
+        </div>
+        <div class="col-8">
+            <div class="pageTable">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <th>All Locations</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="location : ${locations}">
+                        <td class="p-2 d-flex justify-content-center">
+                            <a th:href="@{'/locations/detail/' + ${location.getId} + '/'}" th:text="${location.getVenueName()}" ></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+</main>
+<div th:include="~{fragments/footer::footer}"></div>
+</body>
+</html>

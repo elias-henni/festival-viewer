@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/base_header::base_header (page_title='Backend')}"></th:block>
+    <script src="/js/bundle-artists.js" defer></script>
+    <script src="/js/bundle-festivals.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+
+<body class="flex-wrapper">
+<header th:include="~{fragments/nav::navbar}"></header>
+<main>
+    <div th:if="${'' + #authentication.getAuthorities() == '[ROLE_ARTIST_MANAGER]' || '' + #authentication.getAuthorities() == '[ROLE_ADMIN]'} ">
+        <div>
+            <div class="d-flex align-items-center justify-content-center">
+                <div>
+                    <h1 class="h1 fw-bold mb-1 mt-4 headingText">Artists</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row col-12">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
+                <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4 g-4 list-group-horizontal">
+                    <div class="card" th:each="artist : ${artists}" id="artist-card">
+                        <a th:href="@{'/artists/detail/' + ${artist.getId()} + '/'}" class="card-image"><img th:src="@{'http://localhost:8080/api/image/download/id/' + ${artist.getImage().getId()}}" class="card-img-top" alt="Image of Artist"></a>
+                        <div class="card-body">
+                            <a th:href="@{'/artists/detail/' + ${artist.getId()} + '/'}" class="p-2" th:text="${artist.getName()}" ></a>
+                            <input type="hidden" th:value="${artist.id}">
+                            <button id="deleteArtistBtn" type="button" class="btn btn-primary" >Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+
+        <div class="container pb-2">
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col-4 d-flex justify-content-center p-2">
+                    <button id="addArtistBtn" type="button" class="btn btn-primary">Add an Artist</button>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" id="addArtistForm" hidden>
+
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col-4">
+                    <form method="post" th:object="${artist}">
+                        <div id="info-box-artist" class="visually-hidden alert alert-danger alert-dismissible fade show" role="alert">
+                        </div>
+                        <div id="info-success-artist" class="visually-hidden alert alert-success" role="alert">
+                            Artist Added Successfully!
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" th:field="*{name}" class="form-control" id="artistName"
+                                   placeholder="John">
+                            <label for="artistName">Name</label>
+                            <div role="alert" th:if="${#fields.hasErrors('name')}" class="alert alert-danger" th:errors="*{name}">Name Error</div>
+                        </div>
+
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Birthdate:</span>
+                            <input type="date" th:field="*{birthDate}" id="birthDate" min="1920-01-01"
+                                   placeholder="2000-01-01"
+                                   class="form-control form-control-md" aria-describedby="basic-addon1"/>
+                            <div role="alert" th:if="${#fields.hasErrors('birthDate')}" class="alert alert-danger" th:errors="*{birthDate}">BirthDate Error</div>
+                        </div>
+
+
+                        <div class="form-floating mb-3">
+                            <input type="text" th:field="*{hitSong}" class="form-control" id="hitSong" placeholder="John">
+                            <label for="hitSong">Hit Song</label>
+                            <div role="alert" th:if="${#fields.hasErrors('hitSong')}" class="alert alert-danger" th:errors="*{hitSong}">hitSong Error</div>
+                        </div>
+
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" th:field="*{country}" id="country"
+                                    aria-label="Floating label select example">
+                                <option th:each="country:${countries}" th:value="${country}"
+                                        th:text="${country.getNationality()}"
+                                        value="USA">American
+                                </option>
+                            </select>
+                            <label for="country">Nationality</label>
+                            <div role="alert" th:if="${#fields.hasErrors('country')}" class="alert alert-danger" th:errors="*{country}">Country Error</div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" th:field="*{isOnePersonAct}" id="isOnePersonAct">
+                                <option th:value="${true}" value="true">Yes</option>
+                                <option th:value="${false}" value="false">No</option>
+                            </select>
+                            <label for="isOnePersonAct">Preforms Alone</label>
+                            <div role="alert" th:if="${#fields.hasErrors('isOnePersonAct')}" class="alert alert-danger" th:errors="*{isOnePersonAct}">isOnePersonAct Error</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="artistImage">(Optional) Artist Image</label>
+                            <input type="file" class="form-control" id="artistImage">
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="button" value="Add Artist" id="submitNewArtistBtn" class="btn btn-primary">Add</button>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:if="${'' + #authentication.getAuthorities() == '[ROLE_FESTIVAL_MANAGER]' || '' + #authentication.getAuthorities() == '[ROLE_ADMIN]'} ">
+        <div>
+            <div class="d-flex align-items-center justify-content-center">
+                <div>
+                    <h1 class="h1 fw-bold mb-1 mt-4 headingText">Festivals</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row col-12">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
+                <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4 g-4 list-group-horizontal">
+                    <div class="card" th:each="festival : ${festivals}" id="festival-card">
+                        <a th:href="@{'/festivals/detail/' + ${festival.getId()} + '/'}" class="card-image"><img th:src="@{'http://localhost:8080/api/image/download/id/' + ${festival.getImage().getId()}}" class="card-img-top" alt="Image of Festival"></a>
+                        <div class="card-body">
+                            <a th:href="@{'/festivals/detail/' + ${festival.getId()} + '/'}" class="p-2" th:text="${festival.getName()}"></a>
+                            <input type="hidden" th:value="${festival.id}">
+                            <button id="deleteFestivalBtn" type="button" class="btn btn-primary" >Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+
+        <div class="container pb-2">
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col-4 d-flex justify-content-center p-2">
+                    <button id="addFestivalBtn" type="button" class="btn btn-primary">Add a Festival</button>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" id="addFestivalForm" hidden>
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col-4">
+                    <form method="post" th:object="${festival}">
+                        <div id="info-box-festival" class="visually-hidden alert alert-danger alert-dismissible fade show" role="alert">
+                        </div>
+                        <div id="info-success-festival" class="visually-hidden alert alert-success" role="alert">
+                            Festival Added Successfully!
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" th:field="*{name}" class="form-control" id="festivalName"
+                                   placeholder="John">
+                            <label for="festivalName">Name</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="">Start Date:</span>
+                            <input type="date" th:field="*{startDate}" id="startDate" min="2020-01-01"
+                                   placeholder="2022-01-01"
+                                   class="form-control form-control-md" aria-describedby="basic-addon1"/>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" th:field="*{lengthDays}" class="form-control" id="lengthDays"/>
+                            <label for="lengthDays">Length Days:</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="festivalType" th:field="*{festivalType}"
+                                    aria-label="Floating label select example">>
+                                <option th:each="festivalType:${festivalTypes}" th:value="${festivalType}"
+                                        th:text="${festivalType.getString()}"
+                                        value="RAP">Rap
+                                </option>
+                            </select>
+                            <label for="festivalType">Type</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" th:field="*{organizer}" class="form-control" id="organizer"/>
+                            <label for="organizer">Organizer</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" step="0.01" class="form-control" id="cost" th:field="*{cost}"/>
+                            <label for="cost">Cost</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="festivalImage">(Optional) Festival Image</label>
+                            <input type="file" class="form-control" id="festivalImage">
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="button" value="Add Festival" id="submitNewFestivalBtn" class="btn btn-primary">Submit</button>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:include="~{fragments/footer::footer}"></div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+@use "variables" as *;
+@use "bootstrap/scss/bootstrap";
+
+$primary: rgb(0, 0, 109);
+$danger: rgb(124, 0, 0);
+
+a {
+    text-decoration: none !important;
+}
+
+body {
+    background-color: $body-color !important;
+    //margin-bottom: 35px !important;
+}
+
+p {
+    margin: 0 !important;
+    padding: 1px;
+}
+
+// NAV
+nav {
+    background-color: $nav-color !important;
+       z-index: 1 !important;
+}
+
+.nav-item {
+    a {
+        font-size: 19px !important;
+    }
+
+    > a {
+        color: $nav-items-color !important;
+    }
+}
+
+.navbar-title {
+    z-index: 5;
+    position: absolute;
+    left: 10%;
+    top: 12px;
+    color: $nav-items-color;
+    font-size: 24px;
+}
+
+#navbar a:hover, .navbar-title:hover, #festivalFinder:hover {
+    color: $nav-items-hover-color !important;
+}
+
+.dropdown-item:hover {
+    background-color: white !important;
+    color: black !important;
+}
+
+.navbar-nav {
+    float: none;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+.navbar-nav > li {
+    display: inline-block;
+}
+
+.nav-link {
+    font-size: 19px;
+}
+
+input[type=submit] {
+    background-color: #cbd5e1
+}
+
+.input-group-text {
+    background-color: #f5f5f5;
+}
+
+// images for cards
+
+.card-image {
+    height: 250px;
+    overflow: hidden; }
+
+.index-image {
+    height: 350px;
+    overflow: hidden; }
+
+.index-image img {
+    object-fit: cover;
+    height: 350px;
+}
+
+.card-image img {
+    object-fit: cover;
+    height: 250px;
+}
+
+// Login Page
+.bg-image-vertical {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 100%;
+}
+
+@media (min-width: 1025px) {
+    .h-custom-2 {
+        height: 100%;
+    }
+}
+
+#festivalFinder {
+    font-size: 50px;
+    color: black;
+}
+
+// Index
+#titleText {
+    font-size: 50px;
+    color: black;
+}
+
+.index-card-text {
+    font-size: 30px;
+    font-weight: bolder;
+    color: black;
+}
+
+// FOOTER
+.flex-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.flex-wrapper main {
+    min-height: calc(100vh - 85.5px);
+}
+
+#footer {
+    background-color: #e1e1e1;
+    position: relative;
+    margin-top: 10px;
+}
+
+#allRights {
+    margin: 0;
+    padding: 2px;
+    font-size: 14px;
+}
+
+// BACKEND
+.headingText {
+    font-size: 25px;
+    color: black;
+}

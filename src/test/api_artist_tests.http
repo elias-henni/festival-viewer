@@ -1,0 +1,145 @@
+# ARTISTS API
+# getSingleArtist
+GET http://localhost:8080/api/artists/1 HTTP/1.1
+Accept: application/json
+###
+# Response 200 - OK
+
+GET http://localhost:8080/api/artists/0 HTTP/1.1
+Accept: application/json
+###
+# Repsonse 404 - Not Found
+
+# getAllArtists
+GET http://localhost:8080/api/artists HTTP/1.1
+Accept: application/json
+###
+# Response 200 - OK
+# If there are no artists in the database, the response will be 204 - No Content
+
+# addNewArtist
+POST http://localhost:8080/api/artists HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=7A949B5BE7A3FBC6771FFE6A043161CF
+X-Csrf-Token: e0c352fa-2cf7-4852-8132-612841f19692
+
+{
+  "name": "Elias Henni",
+  "birthDate": "2000-08-01",
+  "hitSong": "Hit song",
+  "isOnePersonAct": true,
+  "country": "CANADA"
+}
+###
+# Response 201 - Created
+
+POST http://localhost:8080/api/artists HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+
+{
+  "name": "Elias Henni",
+  "birthDate": "2000-08-01",
+  "hitSong": "Hit song",
+  "isOnePersonAct": true
+}
+###
+# Response 400 - Bad Request
+
+# updateArtist
+PUT http://localhost:8080/api/artists/2 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+
+{
+  "id": 2,
+  "name": "Elias Henni",
+  "birthDate": "2000-08-01",
+  "hitSong": "Hit song",
+  "isOnePersonAct": true,
+  "country": "CANADA"
+}
+###
+# Response 200 - OK
+
+PUT http://localhost:8080/api/artists/3 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+
+{
+  "id": 2,
+  "name": "Elias Henni",
+  "birthDate": "2000-08-01",
+  "hitSong": "Hit song",
+  "isOnePersonAct": true,
+  "country": "CANADA"
+}
+###
+# Response 409 - Conflict
+
+PUT http://localhost:8080/api/artists/2 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+
+{
+  "id": 2,
+  "name": "Elias Henni",
+  "birthDate": "2000-08-01",
+  "hitSong": "Hit song",
+  "isOnePersonAct": true
+}
+###
+# Response 400 - Bad Request
+
+PUT http://localhost:8080/api/artists/11 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+
+{
+  "id": 2,
+  "name": "Elias Henni",
+  "birthDate": "2000-08-01",
+  "hitSong": "Hit song",
+  "isOnePersonAct": true,
+  "country": "CANADA"
+}
+###
+# Response 404 - Not Found
+
+# deleteArtist
+DELETE http://localhost:8080/api/artists/1 HTTP/1.1
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+###
+# Response 204 - No Content
+
+DELETE http://localhost:8080/api/artists/7 HTTP/1.1
+Accept: application/json
+Cookie: JSESSIONID=EB9C3029DF7109518BA0AA1B41F4485E
+X-Csrf-Token: 1e1b095a-000c-4c25-996c-68cdc2f5da89
+###
+# Response 404 - Not Found
+
+# get artist json
+GET http://localhost:8080/api/artists/1 HTTP/1.1
+Accept: application/json
+###
+# Response 200 - OK
+
+# get artist xml
+GET http://localhost:8080/api/artists/1 HTTP/1.1
+Accept: application/xml
+###
+# Response 200 - OK
