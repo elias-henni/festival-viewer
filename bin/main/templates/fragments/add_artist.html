@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/base_header::base_header (page_title='Add Artist')}"></th:block>
+</head>
+
+<body>
+<header th:include="~{fragments/nav::navbar}"></header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+            <h1>Add an Artist</h1>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+            <form method="post" th:object="${artist}">
+
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{name}" class="form-control" id="floatingInput"
+                           placeholder="John">
+                    <label for="floatingInput">Name</label>
+                    <div role="alert" th:if="${#fields.hasErrors('name')}" class="alert alert-danger" th:errors="*{name}">Name Error</div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon2">Birthdate:</span>
+                    <input type="date" th:field="*{birthDate}" min="1920-01-01"
+                           placeholder="2000-01-01"
+                           class="form-control form-control-md" aria-describedby="basic-addon1"/>
+                    <div role="alert" th:if="${#fields.hasErrors('birthDate')}" class="alert alert-danger" th:errors="*{birthDate}">BirthDate Error</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{hitSong}" class="form-control" id="floatingInput2" placeholder="John">
+                    <label for="floatingInput2">Hit Song</label>
+                    <div role="alert" th:if="${#fields.hasErrors('hitSong')}" class="alert alert-danger" th:errors="*{hitSong}">hitSong Error</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" th:field="*{country}" id="floatingSelect"
+                            aria-label="Floating label select example">
+                        <option th:each="country:${countries}" th:value="${country}"
+                                th:text="${country.getNationality()}"
+                                value="USA">American
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Nationality</label>
+                    <div role="alert" th:if="${#fields.hasErrors('country')}" class="alert alert-danger" th:errors="*{country}">Country Error</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" th:field="*{isOnePersonAct}" id="floatingSelect2">
+                        <option th:value="${true}" value="true">Yes</option>
+                        <option th:value="${false}" value="false">No</option>
+                    </select>
+                    <label for="floatingSelect2">Preforms Alone</label>
+                    <div role="alert" th:if="${#fields.hasErrors('isOnePersonAct')}" class="alert alert-danger" th:errors="*{isOnePersonAct}">isOnePersonAct Error</div>
+                </div>
+
+                <div class="row">
+                    <button type="submit" value="Add Artist" class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</div>
+</body>
+</html>

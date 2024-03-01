@@ -1,0 +1,56 @@
+<div th:fragment="navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <nav id="navbar" class="navbar sticky-top navbar-expand-md">
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../artists.html" th:href="@{/artists}">Artists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../festivals.html" th:href="@{/festivals}">Festivals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../festivals.html" th:href="@{/locations}">Locations</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="nav-link" th:href="@{/login}">Login</a>
+                    </li>
+                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                        <a class="nav-link btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span sec:authentication="name"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <ul class="list-unstyled">
+                                <th:block th:switch="'' + ${#authentication.getAuthorities()}">
+                                    <div th:case="'[ROLE_ADMIN]'">
+                                        <li>
+                                            <a class="dropdown-item" th:href="@{/backend}">Backend</a>
+                                        </li>
+                                    </div>
+                                    <div th:case="'[ROLE_ARTIST_MANAGER]'">
+                                        <li>
+                                            <a class="dropdown-item" th:href="@{/backend}">My Artists</a>
+                                        </li>
+                                    </div>
+                                    <div th:case="'[ROLE_FESTIVAL_MANAGER]'">
+                                        <li>
+                                            <a class="dropdown-item" th:href="@{/backend}">My Festivals</a>
+                                        </li>
+                                    </div>
+                                    <div th:case="*">
+                                        User is some other thing
+                                    </div>
+                                </th:block>
+                                <li>
+                                    <a class="dropdown-item bi bi-box-arrow-in-right" href="#" onclick="document.getElementById('logout-form').submit();"> Log out</a>
+                                    <form id="logout-form" method="post" th:action="@{/logout}"></form>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <a class="navbar-title" th:href="@{/}"><i class="bi bi-binoculars"></i> Festival Finder</a>
+</div>

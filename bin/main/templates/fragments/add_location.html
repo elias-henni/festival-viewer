@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/base_header::base_header (page_title='Add Location')}"></th:block>
+</head>
+
+<body>
+<header th:include="~{fragments/nav::navbar}"></header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+            <h1>Add a Location</h1>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+            <form method="post" th:object="${location}">
+
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{venueName}" class="form-control" id="floatingInput"
+                           placeholder="venueName">
+                    <label for="floatingInput">Venue Name</label>
+                    <div role="alert" th:if="${#fields.hasErrors('venueName')}" class="alert alert-danger" th:errors="*{venueName}">Venue Name Error</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{street}" class="form-control" id="floatingInput2"
+                           placeholder="street">
+                    <label for="floatingInput2">Street</label>
+                    <div role="alert" th:if="${#fields.hasErrors('street')}" class="alert alert-danger" th:errors="*{street}">Street Error</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{city}" class="form-control" id="floatingInput3"
+                           placeholder="city">
+                    <label for="floatingInput3">City</label>
+                    <div role="alert" th:if="${#fields.hasErrors('city')}" class="alert alert-danger" th:errors="*{city}">City Error</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" th:field="*{country}" id="floatingSelect"
+                            aria-label="Floating label select example">
+                        <option th:each="country:${countries}" th:value="${country}"
+                                th:text="${country.toString()}"
+                                value="USA">USA
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Country</label>
+                    <div role="alert" th:if="${#fields.hasErrors('country')}" class="alert alert-danger" th:errors="*{country}">Country Error</div>
+                </div>
+
+                <div class="row">
+                    <button type="submit" value="Add Artist" class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</div>
+</body>
+</html>

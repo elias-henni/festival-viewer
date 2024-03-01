@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/base_header::base_header (page_title='Artist Detail')}"></th:block>
+    <script src="/js/bundle-artist_detail.js" defer></script>
+</head>
+
+<body class="flex-wrapper">
+<header th:include="~{fragments/nav::navbar}"></header>
+<main>
+    <div class="pageTable">
+        <table class="table table-striped table-hover">
+            <thead>
+            <th>Artist Name</th>
+            <th>Artist Age</th>
+            <th>Hit Song</th>
+            <th>Nationality</th>
+            <th>Preforms Alone</th>
+            <th sec:authorize="hasRole('ROLE_ADMIN')">Editing</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td id="name" th:text="${artist.getName()}">Name of Artist</td>
+                <td id="age" th:text="${artist.getAge()}">Age of Artist</td>
+                <td id="hitSong" th:text="${artist.getHitSong()}">Hit song of Artist</td>
+                <td id="nationality" th:text="${artist.getNationality()}">Nationality of Artist</td>
+                <td id="isOnePersonAct" th:text="${artist.isOnePersonAct()} ? 'True' : 'False'">If Artist preforms alone</td>
+                <td>
+                    <input type="hidden" th:value="${artist.id}">
+                    <input id="currentBirthdate" type="hidden" th:value="${artist.birthDate}">
+                    <!--                <input id="countries" type="hidden" th:value="${countries}">-->
+                    <script th:inline="javascript">
+                        const countries = [[${countries}]];
+                    </script>
+                    <button sec:authorize="hasRole('ROLE_ADMIN')" id="editButton" type="button" class="btn btn-primary">Edit</button>
+                    <button sec:authorize="hasRole('ROLE_ADMIN')" id="saveButton" type="button" class="btn btn-primary">Save</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<div th:include="~{fragments/footer::footer}"></div>
+</body>
+</html>
