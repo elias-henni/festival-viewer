@@ -1,41 +1,57 @@
-## Programming 5 - Festival Viewer
-A website where you can view artists and festivals. You can see who is performing at what festival.
+# Festival Viewer
+A website where you can view artists and festivals, and see who is performing at what festival.
 
-### Elias Henni
+### Created by Elias Henni
 
 ## Build Information:
 
-- Spring Boot 2.6.1
-- Java 17
-- SDK version 17
+- **Framework**: Spring Boot 2.6.1
+- **Programming Language**: Java 17
+- **SDK Version**: 17
 
-### Database
+## Prerequisites
+Before you start, ensure you have the following installed:
+- Docker
+- npm (Node Package Manager)
+- webpack
 
-The application uses a PostgreSQL database on port 5434
+## Database Setup
+The application uses a PostgreSQL database that runs on port 5434.
 
-#### Commands
+### Setting Up the Database with Docker
 
-```shell
-npm install
-```
+1. **Install Dependencies**: Run the following command in your terminal to install the necessary Node.js dependencies:
 
-From the project root, create the docker image. It can be created from the `Dockerfile`:
+    ```shell
+    npm install
+    ```
 
-```shell
-docker build -t "festivals_db_image:Dockerfile" .
-```
+2. **Create Docker Image**: Navigate to the project root directory and build a Docker image from the provided `Dockerfile`. This command tags the image as `festivals_db_image`:
 
-Next, create a container. This gives the container the name `festivals_db_container`:
+    ```shell
+    docker build -t festivals_db_image .
+    ```
 
-```shell
-docker create --name festivals_db_container -p 5434:5432 festivals_db_image:Dockerfile
-```
+3. **Create Docker Container**: Create a new Docker container named `festivals_db_container` that maps port 5434 on your machine to port 5432 inside the container, which is the default port for PostgreSQL:
 
-Start the container:
+    ```shell
+    docker create --name festivals_db_container -p 5434:5432 festivals_db_image
+    ```
 
-```shell
-docker container start festivals_db_container
-```
+4. **Start the Container**: Start the Docker container with the following command:
 
-## Build/Run Instructions:
-- Run Application: ``./gradlew bootRun``
+    ```shell
+    docker container start festivals_db_container
+    ```
+
+## Build and Run Instructions
+
+After setting up the database, you can build and run the application with the following command:
+
+- **Run Application**: Execute the command below in your terminal:
+
+    ```shell
+    ./gradlew bootRun
+    ```
+
+This command starts the Spring Boot application. Once the application is running, you should be able to access the Festival Viewer website on your local machine.
