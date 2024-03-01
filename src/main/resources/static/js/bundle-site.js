@@ -13,8 +13,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /*
- * anime.js v3.2.1
- * (c) 2020 Julian Garnier
+ * anime.js v3.2.2
+ * (c) 2023 Julian Garnier
  * Released under the MIT license
  * animejs.com
  */
@@ -241,6 +241,7 @@ var penner = (function () {
 
   var functionEasings = {
     Sine: function () { return function (t) { return 1 - Math.cos(t * Math.PI / 2); }; },
+    Expo: function () { return function (t) { return t ? Math.pow(2, 10 * t - 10) : 0; }; },
     Circ: function () { return function (t) { return 1 - Math.sqrt(1 - t * t); }; },
     Back: function () { return function (t) { return t * t * (3 * t - 2); }; },
     Bounce: function () { return function (t) {
@@ -261,7 +262,7 @@ var penner = (function () {
     }
   };
 
-  var baseEasings = ['Quad', 'Cubic', 'Quart', 'Quint', 'Expo'];
+  var baseEasings = ['Quad', 'Cubic', 'Quart', 'Quint'];
 
   baseEasings.forEach(function (name, i) {
     functionEasings[name] = function () { return function (t) { return Math.pow(t, i + 2); }; };

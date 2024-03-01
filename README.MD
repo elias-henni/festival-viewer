@@ -15,6 +15,10 @@ The application uses a PostgreSQL database on port 5434
 
 #### Commands
 
+```shell
+npm install
+```
+
 From the project root, create the docker image. It can be created from the `Dockerfile`:
 
 ```shell
